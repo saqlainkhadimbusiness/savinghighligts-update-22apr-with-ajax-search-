@@ -304,6 +304,5 @@ Route::post('/addtersms', [PagesController::class, 'termspage']);
 Route::get('/terms', [IndexController::class, 'tooterms']);
 
 
-/*Sorting*/
-Route::post('/admin/coupons/sorting', [CouponsController::class, 'reorderCoupans']);
+
 

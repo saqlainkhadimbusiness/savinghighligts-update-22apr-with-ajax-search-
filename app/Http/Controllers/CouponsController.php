@@ -159,21 +159,5 @@ class CouponsController extends Controller
         $data = $request->all();
         coupons::where('id', $data['id'])->update(['status' => $data['status']]);
     }
-    public function reorder(Request $request)
-    {
-        $request->validate([
-            'ids'   => 'required|array',
-            'ids.*' => 'integer',
-        ]);
 
-        foreach ($request->ids as $index => $id) {
-            DB::table('coupons')
-                ->where('id', $id)
-                ->update([
-                    'position' => $index + 1
-                ]);
-        }
-
-        return response(null, Response::HTTP_NO_CONTENT);
-    }
 }

@@ -128,34 +128,6 @@
 {{-- </script>--}}
 
 
-<script>
-    $(document).ready(function(){
-        $( "#sortable" ).sortable({
-            update: function( event, ui ) {
-                var ids = $('.grabbable').map(function() {
-                    return $(this).attr('data-id');
-                });
-                console.log(ids);
-                $.ajax({
-                    url: "demo_test.txt",
-                    method: "POST",
-                    data:{
-                        "_token": "{{ csrf_token() }}",
-                        "id": id
-                    }
-                    success: function(result){
-                     alert(result);
-                    }
-                    error: function(){
-                        alert("error?");
-                    }
-                });
-            }
 
-        });
-
-    });
-
-</script>
 
 @endsection
