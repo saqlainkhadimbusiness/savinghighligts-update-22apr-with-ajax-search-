@@ -127,7 +127,33 @@
 {{--     });--}}
 {{-- </script>--}}
 
+{{--/*Sorting*/--}}
+<script>
+    $(document).ready(function(){
+        $( "#sortable" ).sortable({
+            update: function( event, ui ) {
+                var ids = $('.grabbable').map(function() {
+                    return $(this).attr('data-id');
+                }).get();
+                console.log(ids);
+                $.ajax({
+                    url: "/admin/coupons/sorting",
+                    type: "POST",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "ids": ids,
+                    },
+                    error: function(){
+                        console.log("AJAX Request Error");
+                    }
+                });
 
+            }
 
+        });
+
+    });
+
+</script>
 
 @endsection

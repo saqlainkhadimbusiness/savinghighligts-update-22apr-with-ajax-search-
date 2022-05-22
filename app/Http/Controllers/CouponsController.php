@@ -148,7 +148,7 @@ class CouponsController extends Controller
         if ($store_id == '') {
             $products = Coupons::get();
         } else {
-            $products = Coupons::where(['store_id' =>  $store_id])->get();
+            $products = Coupons::where(['store_id' =>  $store_id])->orderBy('position','asc')->get();
         }
         $products;
         return view('admin.coupons.view_store')->with(compact('products'));
@@ -159,5 +159,22 @@ class CouponsController extends Controller
         $data = $request->all();
         coupons::where('id', $data['id'])->update(['status' => $data['status']]);
     }
+    /*Sorting*/
+    public function reorderCoupans(Request $request)
+    {
+//        return  0;
+        $request->validate([
+            'ids'   => 'required|array',
+            'ids.*' => 'integer',
+        ]);
+        foreach ($request->ids as $index => $id) {
+            DB::table('coupons')
+                ->where('id', $id)
+                ->update([
+                    'position' => $index + 1
+                ]);
+        }
 
+        return response(null, Response::HTTP_NO_CONTENT);
+    }
 }

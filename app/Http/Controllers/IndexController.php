@@ -53,7 +53,7 @@ class IndexController extends Controller
 
         // dd($discraption);
         // $coupans=Coupons::all();
-        $coupans = coupons::where('store_id', $id)->get();
+        $coupans = coupons::where('store_id', $id)->orderBy('position','asc')->get();
         $name=$n;
      $stores=store::get();
     //  dd( $stores);
